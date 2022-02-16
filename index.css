@@ -42,3 +42,7 @@ a {
     width: 50%;
     padding: 5px;
   }
+  
+  button {
+      margin:10px;
+  }
