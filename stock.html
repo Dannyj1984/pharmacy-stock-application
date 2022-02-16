@@ -15,7 +15,19 @@
             <a href="formulary.html" class="nav__link" data-link>Formulary</a>
             <a href="Stock.html" class="nav__link" data-link>Stock</a>
         </nav>  
+
+        <h1>Add medication to stock</h1>
+
+            <form >
+                <label for="medname">Medication Name:</label>
+                <input type="text" id="medname" name="medname"><br><br>
+                <label for="medstrength">Medication Strength:</label>
+                <input type="text" id="medstrength" name="medstrength"><br><br>
+                <label for="medname">Medication pack size:</label>
+                <input type="text" id="medpacksize" name="medpacksize"><br><br>
+                <input type="submit" value="Submit" onClick="{alert('addStock')}">
+            </form>
         
-        <script src="index.js" async defer></script>
+        <script src="stock.js" async defer></script>
     </body>
 </html>
