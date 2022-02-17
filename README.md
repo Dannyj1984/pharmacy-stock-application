@@ -10,6 +10,12 @@ A member of the pharmacy store can add new medications to the current formulary 
 
 The application is currently hardcoded with code to update the formulary, from the dashboard, click the button named 'update formulary' which will run the code and output to the console and also display the current formulary items on the dashboard in table format. The formulary is saved as an array and is output as a table using console.table() with the array sorted so that the list is in alphabetical order making it easy to find a medication as the formulary grows.
 
+![Add-hardcoded-medication-to-formulary](https://github.com/Dannyj1984/pharmacy-stock-application/blob/main/readme%20gif/update%20formulary.gif)
+
+ A user can also add a medication to the formulary via the user interface, by inputting the medication name and clicking submit under formulary. If the field is left empty in the input, an error will be alerted and printed to the console.
+
+ ![add-to-formulary](https://github.com/Dannyj1984/pharmacy-stock-application/blob/main/readme%20gif/add%20Medication%20to%20formulary%20via%20input%20box.gif)
+
 You can add further medication to the formulary by typing into the console, adter adding medication in this way, the formulary table will update on the dashboard.
 
 ````bash
@@ -50,6 +56,12 @@ The stock list consists of the medication name, the strength of the medication, 
 ## Usage
 
 To run the code to update the stock, click the button on the dashboard named 'update stock' which will run the code and output to the console and display the current stock on the dashboard in a table.. The stocklist consists of an array of objects.
+
+![add-hardcoded-medication-to-stock](https://github.com/Dannyj1984/pharmacy-stock-application/blob/main/readme%20gif/update%20stock.gif)
+
+The user can also add medication to stock by using the user interface. Under the stock section there are inputs for, medication, strength, packsize and quantity.
+
+![add-medication-to-stock-via-input](https://github.com/Dannyj1984/pharmacy-stock-application/blob/main/readme%20gif/add%20new%20medication%20to%20stocklist.gif)
 
 further medication can be added to the stock list with the following code written in the console
 
@@ -92,16 +104,14 @@ addToStock({Medication:"Warfarin", Strength:"3mg", PackSize:"50"}, 5);
 
  As warfarin is not currently in the formulary after pressing the 'update formulary' button, then an alert will be shown and a message printed to console warning the user of this. If you try to add any other medication not in the formulary, then you will receive a similar error.
 
- A user can also add a medication to the formulary via the user interface, by inputting the medication name and clickin submit under formulary. If the field is left empty in the input, an error will be alerted and printed to the console.
-
- ![add-to-formulary](https://github.com/Dannyj1984/pharmacy-stock-application/blob/main/readme%20gif/add%20Medication%20to%20formulary%20via%20input%20box.gif)
-
  In addition to the requirements set out, I have also added a function to reduce the amount of stock which can be used when medication is dispensed, allowing the pharmacy to monitor when stock may need reordering. This method can be called from the console with, 
  ````bash
 reduceStock({Medication : "medName"}, quantity)
  ````
 
- Where medName is the name of the medication to reduce and the quantity is the number of packs to reduce stock by. A check is carried out first to ensure that there is stock available, and if no stock is available, then a message is printed to console
+ Where medName is the name of the medication to reduce and the quantity is the number of packs to reduce stock by. A check is carried out first to ensure that there is stock available, and if no stock is available, then a message is printed to console.
+
+ ![reduce-stock](https://github.com/Dannyj1984/pharmacy-stock-application/blob/main/readme%20gif/reduce%20stock.gif)
 
 
 ## Project status
