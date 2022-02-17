@@ -92,6 +92,10 @@ addToStock({Medication:"Warfarin", Strength:"3mg", PackSize:"50"}, 5);
 
  As warfarin is not currently in the formulary after pressing the 'update formulary' button, then an alert will be shown and a message printed to console warning the user of this. If you try to add any other medication not in the formulary, then you will receive a similar error.
 
+ A user can also add a medication to the formulary via the user interface, by inputting the medication name and clickin submit under formulary. If the field is left empty in the input, an error will be alerted and printed to the console.
+
+ ![add-to-formulary](https://github.com/Dannyj1984/pharmacy-stock-application/blob/main/readme%20gif/add%20Medication%20to%20formulary%20via%20input%20box.gif)
+
  In addition to the requirements set out, I have also added a function to reduce the amount of stock which can be used when medication is dispensed, allowing the pharmacy to monitor when stock may need reordering. This method can be called from the console with, 
  ````bash
 reduceStock({Medication : "medName"}, quantity)
