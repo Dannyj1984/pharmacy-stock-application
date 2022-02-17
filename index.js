@@ -74,6 +74,39 @@ var formularyButton = document
     this.runStock();
   });
 
+  var newFormularyButton = document
+  .querySelector("#formularySave")
+  .addEventListener("click", () => {
+      var medName = document.getElementById("mednameFormulary").value;
+      console.log(medName)
+      if(medName === "") {
+        alert('Please ensure all fields are correctly filled in');
+        console.log("Some information is missing, please ensure all fields are correctly filled in")
+      } else {
+      var medication = [{Medication : medName}];
+      
+      this.addMedication(medication);
+      } 
+  });
+
+  var newStockButton = document
+  .querySelector("#stockSave")
+  .addEventListener("click", () => {
+      var medName = document.getElementById("medname").value;
+      var medStrength = document.getElementById("medstrength").value;
+      var medPackSize = document.getElementById("medpacksize").value;
+      var medQuantity = document.getElementById("noofpacks").value;
+      var medication = {Medication : medName, Strength : medStrength, PackSize : medPackSize};
+      //check that all values are not empty before calling the function to add to stock.
+      if(medName === "" || medStrength === "" || medPackSize === "" || medQuantity === "") {
+          alert('Please ensure all fields are correctly filled in');
+          console.log("Some information is missing, please ensure all fields are correctly filled in")
+      } else {
+          console.log(medQuantity)
+      this.addToStock(medication, parseInt(medQuantity));
+      }
+  });
+
   /**
    * Function to add medication to the formulary. the parameter is an array of String, this allows 
    * one or more meds to be added at the same time
@@ -81,26 +114,27 @@ var formularyButton = document
    */
    addMedication = (medication) => {
     var newMedList = medication;
-    //Loop through the array 
-    for(var med of newMedList) {
-        //Change the string value to lowercase, this will ensure that if the same medication is entere
-        //in uppercase and then lowercase, it cant be added twice.
-        var lowerCase = med.Medication.toLowerCase();
-        //Check if the formulary array already contains this medication
-        var check = formulary.includes(lowerCase);
-        //if the formulary does not contain this medication, then add it to the formulary
-        if(!check) {
-            formulary.push(lowerCase);
-            //If it does contain this medication. log to the console and alert the user of this
-        } else {
-            console.log(lowerCase+ " is already in the formualary");
-            alert(lowerCase +" is already in the formulary");
-        }
+            
+            //Loop through the array 
+            for(var med of newMedList) {
+                //Change the string value to lowercase, this will ensure that if the same medication is entere
+                //in uppercase and then lowercase, it cant be added twice.
+                var lowerCase = med.Medication.toLowerCase();
+                //Check if the formulary array already contains this medication
+                var check = formulary.includes(lowerCase);
+                //if the formulary does not contain this medication, then add it to the formulary
+                if(!check) {
+                    formulary.push(lowerCase);
+                    //If it does contain this medication. log to the console and alert the user of this
+                } else {
+                    console.log(lowerCase+ " is already in the formualary");
+                    alert(lowerCase +" is already in the formulary");
+                }
+            }
+            //Show the list of items in the formulary on the console
+            listFormulary();
+            addRowToFormulary("formTable")
     }
-    //Show the list of items in the formulary on the console
-    listFormulary();
-    addRowToFormulary("formTable")
-  } 
 
   /**
    * add medication to stock, taking a medication object, containing a Medication, Strength and PackSize. then a quantity of packs.
@@ -127,7 +161,8 @@ var formularyButton = document
                      //Get the index from the array of this medication,
                      var index = stockList.findIndex(med => med.Medication === lowerCaseMed)
                      //Update the medication object totalPacks value with the current value + the amount to be added
-                     stockList[index].TotalPacks = med.TotalPacks + quantity;
+                     var number = med.TotalPacks + quantity
+                     stockList[index].TotalPacks = parseInt(number);
                     
                  }
              })
@@ -197,16 +232,18 @@ var formularyButton = document
 * @param {int} quantity
  */
 reduceStock = (medication, quantity) => {
+    //Transform medication to lowercase
+    var lowerCase = medication.Medication.toLowerCase();
     //Check if the medication being added, already exists in the stockList
-    var exists = stockList.some(m => m.Medication === medication.Medication)
+    var exists = stockList.some(m => m.Medication === lowerCase)
         //If the medication is already present in the stocklist, loop through all meds in the stockList,
         if(exists){
              stockList.forEach(med => {
 
                 //  If the name of the current medication in the loop, matches that of the medication being added,
-                 if(med.Medication === medication.Medication){
+                 if(med.Medication === lowerCase){
                      //Get the index from the array of this medication,
-                     var index = stockList.findIndex(med => med.Medication === medication.Medication)
+                     var index = stockList.findIndex(med => med.Medication === lowerCase)
                      //Update the medication object totalPacks value with the current value + the amount to be added
                      stockList[index].TotalPacks = med.TotalPacks - quantity;
                     

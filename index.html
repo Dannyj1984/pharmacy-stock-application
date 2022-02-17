@@ -25,18 +25,40 @@
 
         <button id="stockBtn">Update Stock</button>
 
-        <h3 class="centre">Formulary</h3>
+        <h2 class="centre">Formulary</h2>
+        <h3>Add new medication to the formulary</h3>
+
+            <form >
+                <label for="mednameFormulary">Medication Name:</label>
+                <input type="text" id="mednameFormulary" name="mednameFormulary"><br><br>
+                <input type="button" id="formularySave" value="Submit">
+            </form>
 
         <div id="formularyTable">
             <table id="formTable">
-                <tr>
+                <tr>    
                   <th>Index</th>
                   <th>Medication</th>
                 </tr>
               </table>
         </div>
 
-        <h3 class="centre">Stock</h3>
+        <h2 class="centre">Stock</h2>
+
+        <h3>Add medication to stock</h3>
+
+            <form >
+                <label for="medname">Medication Name:</label>
+                <input type="text" id="medname" name="medname" required><br><br>
+                <label for="medstrength">Medication Strength:</label>
+                <input type="text" id="medstrength" name="medstrength"><br><br>
+                <label for="medpacksize">Medication pack size:</label>
+                <input type="text" id="medpacksize" name="medpacksize"><br><br>
+                <label for="noofpacks">Number of packs to add:</label>
+                <input type="number" id="noofpacks" name="noofpacks"><br><br>
+                <input type="button" id="stockSave" value="Submit">
+                
+            </form>
 
         <div id="stockTable">
             <table id="stTable">
