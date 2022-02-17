@@ -1,9 +1,23 @@
+//JS functions
+//DynamicSort - sort the array of objects using the Medication field
+//DeleteRows - delete all rows other than the head from the specified table
+//showStockList - display the current stocklist in the console and on the dashboard
+//listFormulary = displau the current stocklist in the console and on the dashboard
+//addMedication - add medication to the formulary
+//addMedicationToStock - add medication to the stocklist
+//runFormulary - run the current set of hardcoded functions to add the required medication to the formulary
+//runStock - run the current set of hardcoded functions to add medication to the stock list
+//reduceStock - reduce the number of packs in stock
+//addRowToFormulary - update the formulary table
+//addRowToStock - update the stock table
+
+
 /**
  * Helper function to sort values in the stockList alphabetically
  * @param {String} property - the key of the object by which to sort the values
  * @returns the sorted list
  */
-function dynamicSort(property) {
+dynamicSort = (property) => {
     var sortOrder = 1;
     if(property[0] === "-") {
         sortOrder = -1;
@@ -18,6 +32,14 @@ function dynamicSort(property) {
     }
 }
 
+//Function to delete all rows other thant he header in a table before re populating with data
+DeleteRows = (tableId) => {
+    var rowCount = tableId.rows.length;
+    for (var i = rowCount - 1; i > 0; i--) {
+        tableId.deleteRow(i);
+    }
+}
+
 //initialise empty array for the formulary list
 let formulary = [];
 
@@ -28,12 +50,14 @@ let stockList = [];
 //The stocklist will be sorted using the dynamic sort function and sorted on the medication key
  showStockList = () => {
     console.table(stockList.sort(dynamicSort("Medication")))
+    addRowToStock("stTable")
 }
 
 //Show the formulary as a list on the console
 listFormulary = () => {
     console.log("CURRENT FORMULARY");
     console.table(formulary.sort());
+    addRowToFormulary("formTable");
 }
 
 //button on the dashboard, when clicked will call the function to add a medication to the formulary as per the requirements
@@ -55,7 +79,7 @@ var formularyButton = document
    * one or more meds to be added at the same time
    * @param {array} medication 
    */
-  function addMedication(medication) {
+   addMedication = (medication) => {
     var newMedList = medication;
     //Loop through the array 
     for(var med of newMedList) {
@@ -75,6 +99,7 @@ var formularyButton = document
     }
     //Show the list of items in the formulary on the console
     listFormulary();
+    addRowToFormulary("formTable")
   } 
 
   /**
@@ -83,12 +108,12 @@ var formularyButton = document
    * @param {object} medication 
    * @param {int} quantity 
    */
-  function addToStock(medication, quantity) {
+   addToStock = (medication, quantity) => {
     lowerCaseMed = medication.Medication.toLowerCase();
     //Check if the current medication exists in the formulary list
     var check = formulary.includes(lowerCaseMed);
     //Check if the medication being added, already exists in the stockList
-    var exists = stockList.some(m => m.Medication === medication.Medication)
+    var exists = stockList.some(m => m.Medication === lowerCaseMed)
     //If the medication is in the formulary list, go ahead and add it to the stock list
     if(check) {
         //new object which will contain details of the new medication to add to the stoclist
@@ -98,9 +123,9 @@ var formularyButton = document
              stockList.forEach(med => {
 
                 //  If the name of the current medication in the loop, matches that of the medication being added,
-                 if(med.Medication === medication.Medication){
+                 if(med.Medication === lowerCaseMed){
                      //Get the index from the array of this medication,
-                     var index = stockList.findIndex(med => med.Medication === medication.Medication)
+                     var index = stockList.findIndex(med => med.Medication === lowerCaseMed)
                      //Update the medication object totalPacks value with the current value + the amount to be added
                      stockList[index].TotalPacks = med.TotalPacks + quantity;
                     
@@ -110,7 +135,7 @@ var formularyButton = document
              //create the new medication object from the parameters passed in and create it.
         } else {
             newMed = {
-                Medication: medication.Medication,
+                Medication: lowerCaseMed,
                 Strength: medication.Strength,
                 PackSize: medication.PackSize,
                 TotalPacks: quantity
@@ -127,25 +152,28 @@ var formularyButton = document
     }
     //Show the stocklist in the console as a table.
     showStockList();
+    addRowToStock("stTable");
 }
 
 //function to add medication to the formulary as required
   runFormulary = () => {
-    console.log("FORMULARY UPDATE")
+    console.log("FORMULARY UPDATE");
 
     addMedication([{Medication : "Paracetamol"}, {Medication : "Ibuprofen"}]);
-    console.log(`addMedication(["Paracetamol", "Ibuprofen"]);`)
-    console.log("Added paracetamol and ibuprofen to the formulary")
+    console.log(`addMedication(["Paracetamol", "Ibuprofen"]);`);
+    console.log("Added paracetamol and ibuprofen to the formulary");
     console.log(formulary);
     
     addMedication([{Medication : "Amoxicillin"}]);
-    console.log(`addMedication(["Amoxicillin"]);`)
-    console.log("Added Amoxicillin to the formulary")
+    console.log(`addMedication(["Amoxicillin"]);`);
+    console.log("Added Amoxicillin to the formulary");
     console.log(formulary);
     
     addMedication([{Medication : "Codeine"}, {Medication : "Diclofenac"}, {Medication : "Simvastatin"}, {Medication : "Tramadol"}]);
-    console.log(`addMedication(["Codeine", "Diclofenac", "Simvastatin", "Tramadol"]);`)
-    console.log("Added Codeine, Diclofenac, Simvastatin and Tramadol to the formulary")
+    console.log(`addMedication(["Codeine", "Diclofenac", "Simvastatin", "Tramadol"]);`);
+    console.log("Added Codeine, Diclofenac, Simvastatin and Tramadol to the formulary");
+
+    addRowToFormulary("formTable");
     
 }
 
@@ -159,8 +187,109 @@ var formularyButton = document
     addToStock({Medication:"Tramadol", Strength:"50mg", PackSize:"100"}, 5);
     addToStock({Medication:"Codeine", Strength:"30mg", PackSize:"10"}, 20);
     addToStock({Medication:"Simvastatin", Strength:"10mg", PackSize:"10"}, 10);
-    addToStock({Medication:"Warfarin", Strength:"3mg", PackSize:"50"}, 5);
+    addToStock({Medication:"Warfarin", Strength:"3mg", PackSize:"50"}, 5); 
+    addRowToStock("stTable");
 }
+
+/**
+ * take the medication and reduces the stock by the quantity passed.
+*@param {object} medication 
+* @param {int} quantity
+ */
+reduceStock = (medication, quantity) => {
+    //Check if the medication being added, already exists in the stockList
+    var exists = stockList.some(m => m.Medication === medication.Medication)
+        //If the medication is already present in the stocklist, loop through all meds in the stockList,
+        if(exists){
+             stockList.forEach(med => {
+
+                //  If the name of the current medication in the loop, matches that of the medication being added,
+                 if(med.Medication === medication.Medication){
+                     //Get the index from the array of this medication,
+                     var index = stockList.findIndex(med => med.Medication === medication.Medication)
+                     //Update the medication object totalPacks value with the current value + the amount to be added
+                     stockList[index].TotalPacks = med.TotalPacks - quantity;
+                    
+                 }
+             })
+             //If the medication to be added, is not already in the stocklist
+             //create the new medication object from the parameters passed in and create it.
+        } else {
+            console.log("Sorry, there are currently no " + medication.Medication + " in stock");
+        }
+        addRowToStock("stTable");
+}
+
+/**
+ * Get the id of the formulary table and loop through all items in the formulary and display them in a table
+ */
+  addRowToFormulary = (tableID) => {
+    // Get a reference to the table
+    let tableRef = document.getElementById(tableID);
+    //Empty the table ready for repopulating with the new formulary
+    DeleteRows(tableRef);
+
+   for (let i = 0; i < formulary.length; i++) {
+    // Insert a row at the end of the table
+    let newRow = tableRef.insertRow(-1);
+
+    // Insert a cell in the row at index 0
+    let newCell = newRow.insertCell(0);
+    let newCell2 = newRow.insertCell(1);
+    
+    // Append a text node to the cell
+    let newText = document.createTextNode(i);
+    let newText2 = document.createTextNode(formulary[i]);
+    
+    newCell.appendChild(newText);
+    newCell2.appendChild(newText2);
+    }
+    
+  }
+
+  /**
+ * Get the id of the stock table and loop through all items in the sotck list and display them in a table
+ */
+  addRowToStock = (tableID) => {
+    // Get a reference to the table
+    let tableRef = document.getElementById(tableID);
+    //Empty table ready for populating with the new stocklist
+    DeleteRows(tableRef);
+
+   for (let i = 0; i < stockList.length; i++) {
+    // Insert a row at the end of the table
+    let newRow = tableRef.insertRow(-1);
+
+    // Insert a cell in the row at index 0
+    let newCell = newRow.insertCell(0);
+    let newCell2 = newRow.insertCell(1);
+    let newCell3 = newRow.insertCell(2);
+    let newCell4 = newRow.insertCell(3);
+    let newCell5 = newRow.insertCell(4);
+    
+    // Append a text node to the cell
+    let newText = document.createTextNode(i);
+    let newText2 = document.createTextNode(stockList[i].Medication);
+    let newText3 = document.createTextNode(stockList[i].Strength);
+    let newText4 = document.createTextNode(stockList[i].PackSize);
+    let newText5 = document.createTextNode(stockList[i].TotalPacks);
+
+    
+    newCell.appendChild(newText);
+    newCell2.appendChild(newText2);
+    newCell3.appendChild(newText3);
+    newCell4.appendChild(newText4);
+    newCell5.appendChild(newText5);
+    }
+    
+  }
+
+  
+  
+  
+
+
+
 
 
 

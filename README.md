@@ -8,9 +8,9 @@ A member of the pharmacy store can add new medications to the current formulary 
 
 ## usage
 
-The application is currently hardcoded with code to update the formulary, from the dashboard, click the button named 'update formulary' which will run the code and output to the console. The formulary is saved as an array and is output as a table using console.table() with the array sorted so that the list is in alphabetical order making it easy to find a medication as the formulary grows.
+The application is currently hardcoded with code to update the formulary, from the dashboard, click the button named 'update formulary' which will run the code and output to the console and also display the current formulary items on the dashboard in table format. The formulary is saved as an array and is output as a table using console.table() with the array sorted so that the list is in alphabetical order making it easy to find a medication as the formulary grows.
 
-You can add further medication to the formulary by typing into the console,
+You can add further medication to the formulary by typing into the console, adter adding medication in this way, the formulary table will update on the dashboard.
 
 ````bash
 addMedication([{Medication : "medicationName"}]);
@@ -49,14 +49,14 @@ The stock list consists of the medication name, the strength of the medication, 
 
 ## Usage
 
-To run the code to update the stock, click the button on the dashboard named 'update stock' which will run the code and output to the console. The stocklist consists of an array of objects.
+To run the code to update the stock, click the button on the dashboard named 'update stock' which will run the code and output to the console and display the current stock on the dashboard in a table.. The stocklist consists of an array of objects.
 
 further medication can be added to the stock list with the following code written in the console
 
 ````bash
 addToStock({Medication:"medicationName", Strength:"medStrength", PackSize:"medPackSize"}, quantity);
 ````
-Only one medication can be added to the stock list as a time. If you add a medication that is already in the stock list, then the number of packs to be added is added to the current total number of packs.
+Only one medication can be added to the stock list as a time. If you add a medication that is already in the stock list, then the number of packs to be added is added to the current total number of packs. After adding a new medication to stock, the current stock list will be updated on the dashboard
 
 for example, if adding 100 x 100 packs of 500mg paracetamol,
 
@@ -90,11 +90,19 @@ showStockList();
 addToStock({Medication:"Warfarin", Strength:"3mg", PackSize:"50"}, 5);
  ````
 
- As warfarin is not currently in the formulary after pressing the 'update formulary' button, then an alert will be shown and a message printed to console warning the user of this.
+ As warfarin is not currently in the formulary after pressing the 'update formulary' button, then an alert will be shown and a message printed to console warning the user of this. If you try to add any other medication not in the formulary, then you will receive a similar error.
+
+ In addition to the requirements set out, I have also added a function to reduce the amount of stock which can be used when medication is dispensed, allowing the pharmacy to monitor when stock may need reordering. This method can be called from the console with, 
+ ````bash
+reduceStock({Medication : "medName"}, quantity)
+ ````
+
+ Where medName is the name of the medication to reduce and the quantity is the number of packs to reduce stock by. A check is carried out first to ensure that there is stock available, and if no stock is available, then a message is printed to console
+
 
 ## Project status
 
-This project is currently a proof of concept, I have made some simple simple navigation with 3 pages for the dashboard, formulary and stock. Some more additions to the HTML to show input boxes and buttons, which could be used for the end user to update the formulary and stock, but these are not yet connected to the javascript code to update the formulary and array. The dashboard could also display both the current formulary list and the stock list as a single palce for the user to look for information.
+This project is currently a proof of concept, I have made some simple simple navigation with 3 pages for the dashboard, formulary and stock. Some more additions to the HTML to show input boxes and buttons, which could be used for the end user to update the formulary and stock, but these are not yet connected to the javascript code to update the formulary and array. 
 
 The next stage would be to add to the frontend and also implement some backend code and persistence, so that the formulary and stock lists are stored in a database so that they can be accessed and the data is saved when the application is closed and re opened.
 
