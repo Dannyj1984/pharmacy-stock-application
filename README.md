@@ -55,7 +55,7 @@ The stock list consists of the medication name, the strength of the medication, 
 
 ## Usage
 
-To run the code to update the stock, click the button on the dashboard named 'update stock' which will run the code and output to the console and display the current stock on the dashboard in a table.. The stocklist consists of an array of objects.
+To run the code to update the stock, click the button on the dashboard named 'update stock' which will run the code and output to the console and display the current stock on the dashboard in a table. The stocklist consists of an array of objects.
 
 ![add-hardcoded-medication-to-stock](https://github.com/Dannyj1984/pharmacy-stock-application/blob/main/readme%20gif/update%20stock.gif)
 
@@ -116,7 +116,7 @@ reduceStock({Medication : "medName"}, quantity)
 
 ## Project status
 
-This project is currently a proof of concept, I have made some simple simple navigation with 3 pages for the dashboard, formulary and stock. Some more additions to the HTML to show input boxes and buttons, which could be used for the end user to update the formulary and stock, but these are not yet connected to the javascript code to update the formulary and array. 
+This project is currently a proof of concept, I have made some simple simple navigation with 3 pages for the dashboard, formulary and stock. (formulary and stock are not currently active) With some simple inputs on a single page which can produce the functionality required. Moving the inputs for adding formulary items and stock to their own page would be required in the full production application to separeate different logic.
 
-The next stage would be to add to the frontend and also implement some backend code and persistence, so that the formulary and stock lists are stored in a database so that they can be accessed and the data is saved when the application is closed and re opened.
+The next stage would be to add to the frontend and also implement some backend code and persistence, so that the formulary and stock lists are stored in a database so that they can be accessed and the data is saved when the application is closed and re opened. Other functionality would like be required, such as removing items from the formulary, as well as updating the stock control to allow different lines for various strengths and formulations of the same medication, such as Tramadol capsules and Tramadol modified release tablets. The pharmacy may also want to have separate rows for each medication which has different packsizes.
 

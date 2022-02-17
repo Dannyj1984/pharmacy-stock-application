@@ -311,12 +311,32 @@ reduceStock = (medication, quantity) => {
     let newText4 = document.createTextNode(stockList[i].PackSize);
     let newText5 = document.createTextNode(stockList[i].TotalPacks);
 
-    
-    newCell.appendChild(newText);
-    newCell2.appendChild(newText2);
-    newCell3.appendChild(newText3);
-    newCell4.appendChild(newText4);
-    newCell5.appendChild(newText5);
+    //Check if stock level is below 10, if so show the medication in red to warn of low stock
+    if(stockList[i].TotalPacks < 10) {
+        console.log(stockList[i].Medication +" is running low, please reorder")
+        var container = document.createElement("span");
+        let newText = document.createTextNode(i);
+        let newText2 = document.createTextNode(stockList[i].Medication);
+        container.appendChild(newText2);
+        container.style.color= "red";
+        let newText3 = document.createTextNode(stockList[i].Strength);
+        let newText4 = document.createTextNode(stockList[i].PackSize);
+        let newText5 = document.createTextNode(stockList[i].TotalPacks);
+
+        newCell.appendChild(newText);
+        newCell2.appendChild(container);
+        newCell3.appendChild(newText3);
+        newCell4.appendChild(newText4);
+        newCell5.appendChild(newText5);
+       
+        //If not below 10, medication name in black
+    } else {
+        newCell.appendChild(newText);
+        newCell2.appendChild(newText2);
+        newCell3.appendChild(newText3);
+        newCell4.appendChild(newText4);
+        newCell5.appendChild(newText5);
+        }
     }
     
   }
