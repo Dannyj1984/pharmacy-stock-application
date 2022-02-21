@@ -1,6 +1,5 @@
 # pharmacy-stock-application
-This application is a solution for pharmacy software where the end user needs to keep a formulary of medications which they can dispense, and
-also a stock control system. 
+This application is a solution for pharmacy software where the end user needs to keep a formulary of medications which they can dispense, and also a stock control system. The programme is writting in JavaScript with some HTML for the user interface. Code has been written by Daniel Jebb with some inspiration (and help) from online resources such as w3schools and stackoverflow. It was written as part of a kata for a job application.
 
 ## Formulary
 
@@ -113,10 +112,14 @@ reduceStock({Medication : "medName"}, quantity)
 
  ![reduce-stock](https://github.com/Dannyj1984/pharmacy-stock-application/blob/main/readme%20gif/reduce%20stock.gif)
 
+ If the current stock level falls below 10, then the medication name is printed in red to alert the user that it will need reordering. and a message is printed to the console
+
 
 ## Project status
 
 This project is currently a proof of concept, I have made some simple simple navigation with 3 pages for the dashboard, formulary and stock. (formulary and stock are not currently active) With some simple inputs on a single page which can produce the functionality required. Moving the inputs for adding formulary items and stock to their own page would be required in the full production application to separeate different logic.
 
 The next stage would be to add to the frontend and also implement some backend code and persistence, so that the formulary and stock lists are stored in a database so that they can be accessed and the data is saved when the application is closed and re opened. Other functionality would like be required, such as removing items from the formulary, as well as updating the stock control to allow different lines for various strengths and formulations of the same medication, such as Tramadol capsules and Tramadol modified release tablets. The pharmacy may also want to have separate rows for each medication which has different packsizes.
+
+Currently the application will show the medication name in red in the stock list if the quantity of packs remaining is below 10. This would likely need to be updated so that different medication have different alert levels depending on what level the pharmacy need to reorder to ensure they do not run out.
 

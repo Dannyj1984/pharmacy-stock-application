@@ -63,3 +63,7 @@ a {
   tr:nth-child(even) {
     background-color: #dddddd;
   }
+  
+  .red-text {
+    color: red;
+  }
