@@ -11,7 +11,7 @@ body {
     left: 0;
     width: var(--nav-width);
     height: 100vh;
-    background: #222222;
+    background: #45a049;
 }
 
 .nav__link {
@@ -23,7 +23,7 @@ body {
 }
 
 .nav__link:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: #45a049;
 }
 
 a {
@@ -45,6 +45,18 @@ a {
   
   button {
       margin:10px;
+      
+  }
+
+  .btn {
+    background-color: #45a049;
+    color: white;
+    font-size: 16px;
+    padding: 14px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    text-decoration: none;
+    border:none;
   }
 
   /* Table styling */
@@ -66,4 +78,35 @@ a {
   
   .red-text {
     color: red;
+  }
+
+  #container {
+    padding:10px;
+  }
+
+  /* Form styling */
+
+  input[type=text], input[type=number], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
   }

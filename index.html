@@ -21,31 +21,35 @@
         </header>
         <hr>
 
-        <button id="formularyBtn">Update Formulary</button>
+        <div id="container">
+            <button id="formularyBtn" class="btn">Update Formulary</button>
 
-        <button id="stockBtn">Update Stock</button>
+            <button id="stockBtn" class="btn">Update Stock</button>
 
-        <h2 class="centre">Formulary</h2>
-        <h3>Add new medication to the formulary</h3>
+            <h2 class="centre">Formulary</h2>
+            <h3>Add new medication to the formulary</h3>
 
             <form >
                 <label for="mednameFormulary">Medication Name:</label>
                 <input type="text" id="mednameFormulary" name="mednameFormulary"><br><br>
-                <input type="button" id="formularySave" value="Submit">
+                <input type="submit" id="formularySave" value="Submit">
             </form>
 
-        <div id="formularyTable">
-            <table id="formTable">
-                <tr>    
-                  <th>Index</th>
-                  <th>Medication</th>
-                </tr>
-              </table>
-        </div>
+            <h2 id="formulary">Formulary List</h2>
 
-        <h2 class="centre">Stock</h2>
+            <div id="formularyTable">
+                <table id="formTable">
+                    <tr>    
+                    <th>Index</th>
+                    <th>Medication</th>
+                    </tr>
+                </table>
+            </div>
 
-        <h3>Add medication to stock</h3>
+            <hr>
+            <h2 class="centre">Stock</h2>
+
+            <h3>Add medication to stock</h3>
 
             <form >
                 <label for="medname">Medication Name:</label>
@@ -56,20 +60,23 @@
                 <input type="text" id="medpacksize" name="medpacksize"><br><br>
                 <label for="noofpacks">Number of packs to add:</label>
                 <input type="number" id="noofpacks" name="noofpacks"><br><br>
-                <input type="button" id="stockSave" value="Submit">
+                <input type="submit" id="stockSave" value="Submit">
                 
             </form>
 
-        <div id="stockTable">
-            <table id="stTable">
-                <tr>
-                  <th>Index</th>
-                  <th>Medication</th>
-                  <th>Strength</th>
-                  <th>Pack size</th>
-                  <th>Total Packs</th>
-                </tr>
-              </table>
+            <h2 id="stock"> Stock List</h2>
+
+            <div id="stockTable">
+                <table id="stTable">
+                    <tr>
+                    <th>Index</th>
+                    <th>Medication</th>
+                    <th>Strength</th>
+                    <th>Pack size</th>
+                    <th>Total Packs</th>
+                    </tr>
+                </table>
+            </div>
         </div>
         
         <script src="index.js" async defer></script>

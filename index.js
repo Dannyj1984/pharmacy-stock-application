@@ -18,7 +18,7 @@
  * @param {String} property - the key of the object by which to sort the values
  * @returns the sorted list
  */
-dynamicSort = (property) => {
+function dynamicSort (property)  {
     var sortOrder = 1;
     return function (a,b) {
         //check the values for the passed in property and sort by alphabetical order
@@ -30,7 +30,7 @@ dynamicSort = (property) => {
 /**
  * @param tableId - the id of the table to delete rows from
  */
-DeleteRows = (tableId) => {
+function DeleteRows (tableId) {
     var rowCount = tableId.rows.length;
     for (var i = rowCount - 1; i > 0; i--) {
         tableId.deleteRow(i);
@@ -51,7 +51,7 @@ let stockList = [];
 }
 
 //Show the formulary as a list on the console
-listFormulary = () => {
+function listFormulary () {
     console.log("CURRENT FORMULARY");
     console.table(formulary.sort());
     addRowToFormulary("formTable");
@@ -74,7 +74,8 @@ var formularyButton = document
   //Declare the formulary button and onClick, get the value from the formulary input
   var newFormularyButton = document
   .querySelector("#formularySave")
-  .addEventListener("click", () => {
+  .addEventListener("click", (e) => {
+      e.preventDefault();
       var medName = document.getElementById("mednameFormulary").value;
       console.log(`${medName}`);
       //Check the input isnt empty
@@ -92,7 +93,8 @@ var formularyButton = document
   //Declare the add to stock button and onClick, get the values from the inputs
   var newStockButton = document
   .querySelector("#stockSave")
-  .addEventListener("click", () => {
+  .addEventListener("click", (e) => {
+      e.preventDefault();
       var medName = document.getElementById("medname").value;
       var medStrength = document.getElementById("medstrength").value;
       var medPackSize = document.getElementById("medpacksize").value;
@@ -114,7 +116,7 @@ var formularyButton = document
    * one or more meds to be added at the same time
    * @param {array} medication 
    */
-   addMedication = (medication) => {
+   function addMedication (medication) {
     var newMedList = medication;
             
             //Loop through the array 
@@ -122,7 +124,7 @@ var formularyButton = document
                 //Change the string value to lowercase and trim and leading or trailing whitespace, this will ensure that if the same medication is entered
                 //with different capitalisation, or unintended leading and trailing whitespace, it cant be added twice.
                 var lowerCase = med.Medication.toLowerCase().trim();
-                //Check if the formulary array already contains this medication
+                // Medication name must be unique in the formulary so check if the formulary array already contains this medication
                 var check = formulary.includes(lowerCase);
                 //if the formulary does not contain this medication, then add it to the formulary
                 if(!check) {
@@ -144,7 +146,7 @@ var formularyButton = document
    * @param {object} medication 
    * @param {int} quantity 
    */
-   addToStock = (medication, quantity) => {
+   function addToStock (medication, quantity) {
        //Check if quantity is a number
        if(!Number.isNaN(parseInt(quantity))) {
            
@@ -167,6 +169,7 @@ var formularyButton = document
                     //Update the total packs of the medication to include the quantity added.
                     .TotalPacks = stockList.filter( ({Medication}) => Medication === lowerCaseMed)[0].TotalPacks + quantity;
                     console.log(`${quantity} packs of ${medication.Medication} added to stock`);
+
 
                     //If the medication to be added, is not already in the stocklist
                     //create the new medication object from the parameters passed in and create it.
@@ -198,7 +201,7 @@ var formularyButton = document
     }
 
 //function to add medication to the formulary as required
-  runFormulary = () => {
+  function runFormulary () {
     console.log("FORMULARY UPDATE");
 
     addMedication([{Medication : "Paracetamol"}, {Medication : "Ibuprofen"}]);
@@ -216,11 +219,13 @@ var formularyButton = document
     console.log("Added Codeine, Diclofenac, Simvastatin and Tramadol to the formulary");
 
     addRowToFormulary("formTable");
+    const table = document.querySelector('#formulary');
+    table.scrollIntoView();
     
 }
 
 //Function to add stock to the stocklist
-  runStock = () => {
+  function runStock () {
     console.log("--------------------------------------------------------------------")
     console.log("STOCK UPDATE");
     console.log(`addToStock({Medication:"Paracetamol", Strength:"500mg", PackSize:"50"}, 100);`);
@@ -238,6 +243,8 @@ var formularyButton = document
     console.log(`addToStock({Medication:"Warfarin", Strength:"3mg", PackSize:"50"}, 5); `)
     addToStock({Medication:"Warfarin", Strength:"3mg", PackSize:"50"}, 5); 
     addRowToStock("stTable");
+    const table = document.querySelector('#stock');
+    table.scrollIntoView();
 }
 
 /**
@@ -245,7 +252,7 @@ var formularyButton = document
 *@param {object} medication 
 * @param {int} quantity
  */
-reduceStock = (medication, quantity) => {
+function reduceStock (medication, quantity) {
     //Transform medication to lowercase
     var lowerCase = medication.Medication.toLowerCase();
     //Check if the medication being added, already exists in the stockList
@@ -276,7 +283,7 @@ reduceStock = (medication, quantity) => {
  * Get the id of the formulary table and loop through all items in the formulary and display them in a table
  * @param tableID - get the id of the table to add a formulary row to
  */
-  addRowToFormulary = (tableID) => {
+  function addRowToFormulary (tableID) {
     // Get a reference to the table
     let tableRef = document.getElementById(tableID);
     //Empty the table ready for repopulating with the new formulary
@@ -308,7 +315,7 @@ reduceStock = (medication, quantity) => {
  * Get the id of the stock table and loop through all items in the sotck list and display them in a table
  * @param tableID - get the id of the table to add a row of stock to
  */
-  addRowToStock = (tableID) => {
+  function addRowToStock (tableID) {
     // Get a reference to the table
     let tableRef = document.getElementById(tableID);
     //Empty table ready for populating with the new/updated stocklist
